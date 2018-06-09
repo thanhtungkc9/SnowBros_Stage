@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Ground
+  - Item
+  - Enemy
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - Ground
+  - Enemy
+  - Boss
+  - EnemyFreeze4
+  - EnemyFreeze
+  - Player
+  - Destroyed
+  - JumpPosition
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 2191687795
+    locked: 0
+  - name: Grounds
+    uniqueID: 2930540539
+    locked: 0
+  - name: Enemy
+    uniqueID: 3217275467
+    locked: 0
+  - name: Player
+    uniqueID: 1572147551
+    locked: 0
+  - name: UI
+    uniqueID: 3848175919
+    locked: 0
