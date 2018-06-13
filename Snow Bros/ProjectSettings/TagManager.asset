@@ -7,6 +7,11 @@ TagManager:
   - Ground
   - Item
   - Enemy
+  - Wall
+  - JumpPosition
+  - EnemyBullet
+  - SnowBall
+  - MovingPlatform
   layers:
   - Default
   - TransparentFX
@@ -18,9 +23,9 @@ TagManager:
   - 
   - Ground
   - Enemy
-  - Boss
-  - EnemyFreeze4
-  - EnemyFreeze
+  - SnowBall
+  - EnemyColWithPlayer
+  - EnemyNotColWithPlayer
   - Player
   - Destroyed
   - JumpPosition

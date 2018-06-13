@@ -59,7 +59,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\FloattingGround.cs" />
     <Compile Include="Assets\Scripts\Boss\Boss1\AI_Boss1.cs" />
     <Compile Include="Assets\Scripts\Boss\Boss1\Boss1AttackBehaviour.cs" />
     <Compile Include="Assets\Scripts\Boss\Boss1\Boss1IdleBehaviour.cs" />
@@ -84,18 +83,16 @@
     <Compile Include="Assets\Scripts\Enemies\GreenEnemy\GreenEnemyAttack1Behaviour.cs" />
     <Compile Include="Assets\Scripts\Enemies\GreenEnemy\GreenEnemyAttack2Behaviour.cs" />
     <Compile Include="Assets\Scripts\Enemies\GreenEnemy\GreenEnemyDie2Behaviour.cs" />
-    <Compile Include="Assets\Scripts\Enemies\GreenEnemy\GreenEnemyFallBehaviour.cs" />
     <Compile Include="Assets\Scripts\Enemies\GreenEnemy\GreenEnemyTurnBehaviour.cs" />
     <Compile Include="Assets\Scripts\Enemies\GreenEnemy\GreenEnemyWalkBehaviour.cs" />
     <Compile Include="Assets\Scripts\Enemies\GreenEnemy\GreenVerticalEnemyAI.cs" />
     <Compile Include="Assets\Scripts\Enemies\RedEnemy\RedEnemyAI.cs" />
     <Compile Include="Assets\Scripts\Enemies\RedEnemy\RedEnemyDie2Behaviour.cs" />
-    <Compile Include="Assets\Scripts\Enemies\RedEnemy\RedEnemyFallBehaviour.cs" />
-    <Compile Include="Assets\Scripts\Enemies\RedEnemy\RedEnemyFreeze1Behaviour.cs" />
-    <Compile Include="Assets\Scripts\Enemies\RedEnemy\RedEnemyJumpBehaviour.cs" />
+    <Compile Include="Assets\Scripts\Enemies\RedEnemy\RedEnemyScrollBehaviour.cs" />
     <Compile Include="Assets\Scripts\Enemies\RedEnemy\RedEnemyTurnBehaviour.cs" />
     <Compile Include="Assets\Scripts\Enemies\RedEnemy\RedEnemyWalkBehaviour.cs" />
     <Compile Include="Assets\Scripts\Enemies\SizeJumpEnemy.cs" />
+    <Compile Include="Assets\Scripts\Enemies\Snowman\Snowman_AI.cs" />
     <Compile Include="Assets\Scripts\Enemies\YellowEnemy\YellowEnemyAI.cs" />
     <Compile Include="Assets\Scripts\Enemies\YellowEnemy\YellowEnemyDie2Behaviour.cs" />
     <Compile Include="Assets\Scripts\Enemies\YellowEnemy\YellowEnemyFallBehaviour.cs" />
@@ -103,6 +100,18 @@
     <Compile Include="Assets\Scripts\Enemies\YellowEnemy\YellowEnemyJumpBehaviour.cs" />
     <Compile Include="Assets\Scripts\Enemies\YellowEnemy\YellowEnemyTurnBehaviour.cs" />
     <Compile Include="Assets\Scripts\Enemies\YellowEnemy\YellowEnemyWalkBehaviour.cs" />
+    <Compile Include="Assets\Scripts\Items\Coin.cs" />
+    <Compile Include="Assets\Scripts\Items\GoldenKey.cs" />
+    <Compile Include="Assets\Scripts\Items\HealthHeart.cs" />
+    <Compile Include="Assets\Scripts\Items\SilverKey.cs" />
+    <Compile Include="Assets\Scripts\Objects\Elevator.cs" />
+    <Compile Include="Assets\Scripts\Objects\Fire.cs" />
+    <Compile Include="Assets\Scripts\Objects\FireMachineGun.cs" />
+    <Compile Include="Assets\Scripts\Objects\FloattingGround.cs" />
+    <Compile Include="Assets\Scripts\Objects\Lava.cs" />
+    <Compile Include="Assets\Scripts\Objects\Snowball_Snowman.cs" />
+    <Compile Include="Assets\Scripts\Objects\SnowBallDrop.cs" />
+    <Compile Include="Assets\Scripts\Objects\SnowBallScript.cs" />
     <Compile Include="Assets\Scripts\Player\Bullet.cs" />
     <Compile Include="Assets\Scripts\Player\BulletDestroyedBehaviour.cs" />
     <Compile Include="Assets\Scripts\Player\Player.cs" />
@@ -116,20 +125,20 @@
     <Compile Include="Assets\Scripts\Player\PlayerThrowBehaviour.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerWalkBehaviour.cs" />
     <Compile Include="Assets\Scripts\scriptTexttest.cs" />
+    <Compile Include="Assets\Scripts\UI\HealthScript.cs" />
     <Compile Include="Assets\Simple UI\Samples\IconPreview.cs" />
-    <Compile Include="Assets\SnowBallScript.cs" />
     <None Include="Assets\Simple UI\Fonts\OFL.txt" />
     <Reference Include="UnityEditor.StandardEvents">
-      <HintPath>C:/Users/ThanhTung/Desktop/TKG/SnowBrosStage/SnowBros/SnowBros_Stage/Snow Bros/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
+      <HintPath>C:/Users/ThanhTung/Desktop/TKG/Final_SnowBrosStage/SnowBros_Stage/Snow Bros/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>C:/Users/ThanhTung/Desktop/TKG/SnowBrosStage/SnowBros/SnowBros_Stage/Snow Bros/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>C:/Users/ThanhTung/Desktop/TKG/Final_SnowBrosStage/SnowBros_Stage/Snow Bros/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.PackageManagerUI.Editor">
-      <HintPath>C:/Users/ThanhTung/Desktop/TKG/SnowBrosStage/SnowBros/SnowBros_Stage/Snow Bros/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+      <HintPath>C:/Users/ThanhTung/Desktop/TKG/Final_SnowBrosStage/SnowBros_Stage/Snow Bros/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>C:/Users/ThanhTung/Desktop/TKG/SnowBrosStage/SnowBros/SnowBros_Stage/Snow Bros/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>C:/Users/ThanhTung/Desktop/TKG/Final_SnowBrosStage/SnowBros_Stage/Snow Bros/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.0b4/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>

@@ -10,40 +10,43 @@ public class RedEnemyWalkBehaviour : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
         if (GlobalControl.isPaused) return;
         animator.SetInteger("RedEnemyCurrentState", animator.GetComponent<RedEnemyAI>().STATE_WALK);
-        if (animator.GetComponent<RedEnemyAI>().transform.localScale.x > 0)
-        {
-            float forceX = 0f;
+        if (animator.GetComponent<RedEnemyAI>().isOutOfRange == false)
 
-            if (animator.GetComponent<RedEnemyAI>().redEnemyBody.velocity.x < animator.GetComponent<RedEnemyAI>().maxVelocity)
+            if (animator.GetComponent<RedEnemyAI>().transform.localScale.x > 0)
             {
-                if (animator.GetComponent<RedEnemyAI>().grounded)
-                {
-                    forceX = animator.GetComponent<RedEnemyAI>().moveForce;
-                }
-                else
-                {
-                    forceX = animator.GetComponent<RedEnemyAI>().moveForce * 0.5f;
-                }
-            }
-            animator.GetComponent<RedEnemyAI>().redEnemyBody.AddForce(new Vector2(forceX, 0));
-        }
-        else
-        {
-            float forceX = 0f;
+                float forceX = 0f;
 
-            if (animator.GetComponent<RedEnemyAI>().redEnemyBody.velocity.x > -animator.GetComponent<RedEnemyAI>().maxVelocity)
-            {
-                if (animator.GetComponent<RedEnemyAI>().grounded)
+                if (animator.GetComponent<RedEnemyAI>().redEnemyBody.velocity.x < animator.GetComponent<RedEnemyAI>().walkVelocity)
                 {
-                    forceX = -animator.GetComponent<RedEnemyAI>().moveForce;
+                    if (animator.GetComponent<RedEnemyAI>().grounded)
+                    {
+                        forceX = animator.GetComponent<RedEnemyAI>().moveForce;
+                    }
+                    else
+                    {
+                        forceX = animator.GetComponent<RedEnemyAI>().moveForce * 0.5f;
+                    }
                 }
-                else
-                {
-                    forceX = -animator.GetComponent<RedEnemyAI>().moveForce * 0.5f;
-                }
+                animator.GetComponent<RedEnemyAI>().redEnemyBody.AddForce(new Vector2(forceX, 0));
             }
-            animator.GetComponent<RedEnemyAI>().redEnemyBody.AddForce(new Vector2(forceX, 0));
-        }
+            else
+            {
+                float forceX = 0f;
+
+                if (animator.GetComponent<RedEnemyAI>().redEnemyBody.velocity.x > -animator.GetComponent<RedEnemyAI>().walkVelocity)
+                {
+                    if (animator.GetComponent<RedEnemyAI>().grounded)
+                    {
+                        forceX = -animator.GetComponent<RedEnemyAI>().moveForce;
+                    }
+                    else
+                    {
+                        forceX = -animator.GetComponent<RedEnemyAI>().moveForce * 0.5f;
+                    }
+                }
+                animator.GetComponent<RedEnemyAI>().redEnemyBody.AddForce(new Vector2(forceX, 0));
+            }
+     
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -53,7 +56,7 @@ public class RedEnemyWalkBehaviour : StateMachineBehaviour
         {
             float forceX = 0f;
 
-                if (animator.GetComponent<RedEnemyAI>().redEnemyBody.velocity.x < animator.GetComponent<RedEnemyAI>().maxVelocity)
+                if (animator.GetComponent<RedEnemyAI>().redEnemyBody.velocity.x < animator.GetComponent<RedEnemyAI>().walkVelocity)
                 {
                     if (animator.GetComponent<RedEnemyAI>().grounded)
                     {
@@ -70,7 +73,7 @@ public class RedEnemyWalkBehaviour : StateMachineBehaviour
         {
             float forceX = 0f;
 
-            if (animator.GetComponent<RedEnemyAI>().redEnemyBody.velocity.x > -animator.GetComponent<RedEnemyAI>().maxVelocity)
+            if (animator.GetComponent<RedEnemyAI>().redEnemyBody.velocity.x > -animator.GetComponent<RedEnemyAI>().walkVelocity)
             {
                 if (animator.GetComponent<RedEnemyAI>().grounded)
                 {

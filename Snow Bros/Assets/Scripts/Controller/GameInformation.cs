@@ -14,7 +14,7 @@ public class GameInformation : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        DeathCount.text = GlobalControl.DeathCount.ToString();
-        Score.text = GlobalControl.Score.ToString();
+       // DeathCount.text = GlobalControl.DeathCount.ToString();
+        //Score.text = GlobalControl.Score.ToString();
 	}
 }

@@ -29,9 +29,7 @@ public class CameraControllerScript : MonoBehaviour
         isFollowing = true;
         mainCamera = GetComponent<Camera>();
 
-        // Camera background Colour.
-        if (Application.loadedLevelName != "Town")
-            mainCamera.backgroundColor = Color.black;
+        
     }
 
     void Update()

@@ -36,14 +36,18 @@ public class GreenEnemyAI : MonoBehaviour
     public float maxVelocity = 1.5f;
     public float time = 0.0f;
 
+    //Chi so enemy
+    public int currentHealth = 3;
+
+
     [SerializeField]
     private GameObject bulletFire;
     [SerializeField]
     private Transform shootPointHorizontal,shootPointVertical;
     [SerializeField]
     private Transform startPoint, endPoint;
-    //Enemy Information
-    public int Health = 100;
+
+    //trang thai enemy
     public bool isShoot = false;
 
     private void Awake()
@@ -64,6 +68,10 @@ public class GreenEnemyAI : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (currentHealth<=0)
+        {
+            Death();
+        }
         time += Time.deltaTime;       
        if ((transform.position.x<startX&&transform.localScale.x<0.0f)||(transform.position.x>endX&& transform.localScale.x > 0.0f))
         {
@@ -72,27 +80,34 @@ public class GreenEnemyAI : MonoBehaviour
         }
 
     }
-    void OnCollisionEnter2D(Collision2D target)
-    {
-       
+    
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            collision.gameObject.SendMessage("Damage", 1);
+        }
     }
 
-    private void OnCollisionStay2D(Collision2D target)
+    private void OnTriggerStay2D(Collider2D collision)
     {
-
-        
-    }
-
-    private void OnCollisionExit2D(Collision2D target)
-    {
-       
+        if (collision.gameObject.tag == "Player")
+        {
+            collision.gameObject.SendMessage("Damage", 1);
+        }
     }
 
     void Damage(int dmg)
     {
         if (gameObject.layer != 14)
-            Health = Mathf.Max(0, Health - dmg);
+            currentHealth -= dmg;
+        Debug.Log(currentHealth);
+    }
+
+    public void Death()
+    {
+        Destroy(gameObject);
     }
 
     public IEnumerator Attack1()

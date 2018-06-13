@@ -110,7 +110,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 8
   dmg: 10
-  forceX: 120
+  forceX: 150
   forceY: 15
   timeExist: 0.4
   bigBullet: {fileID: 0}

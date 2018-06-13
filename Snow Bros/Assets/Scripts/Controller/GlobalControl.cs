@@ -20,7 +20,7 @@ public class GlobalControl : MonoBehaviour
     //PlayerBullet
     public static float mass = 0.3f;        //0.2 with Item
     public static float timeExist = 0.4f;   // 0.6 with Item
-    public static int damage = 10;          //15 with Item
+    public static int damage = 1;          //15 with Item
     public static string spriteName = "SmallBullet"; // BigBullet with Item
 
     //Scene Information
@@ -48,7 +48,7 @@ public class GlobalControl : MonoBehaviour
     }
     public void Player_PowerItem()
     {
-        damage = 15;
+        damage = 2;
         spriteName = "BigBullet";
     }
     public void Player_RangeItem()

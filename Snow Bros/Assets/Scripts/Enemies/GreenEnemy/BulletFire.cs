@@ -68,10 +68,13 @@ public class BulletFire : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Tuong" || collision.gameObject.tag == "Player")
+        if(collision.gameObject.tag == "Wall" || collision.gameObject.tag == "Player")
         {
-            Debug.Log("BulletFire collider");
+            Debug.Log("BulletFire collision with "+collision.gameObject.tag);
+           if (collision.gameObject.tag=="Player")
+                collision.gameObject.SendMessage("Damage", 1);
             Destroy(gameObject);
+
         }
     }
 }

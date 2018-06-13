@@ -7,10 +7,11 @@ public class RedEnemyTurnBehaviour : StateMachineBehaviour {
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
    override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
+        animator.GetComponent<RedEnemyAI>().redEnemyBody.velocity = new Vector2(0, 0);
         Vector3 scale = animator.GetComponent<RedEnemyAI>().transform.localScale;
         scale.x = -scale.x;
         animator.GetComponent<RedEnemyAI>().transform.localScale = scale;
-        animator.GetComponent<RedEnemyAI>().redEnemyBody.velocity = new Vector2(0, 0);
+        
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

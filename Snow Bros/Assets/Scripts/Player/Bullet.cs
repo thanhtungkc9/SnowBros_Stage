@@ -5,7 +5,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour {
 
     public float speed = 8f;
-    public int dmg = 10;
+    public int dmg = 1;
     public float forceX=120.0f;
     public float forceY=15.0f;
     public float timeExist = 0.4f;
@@ -71,13 +71,16 @@ public class Bullet : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Item" || collision.gameObject.tag == "Wall")
+        if (collision.gameObject.tag == "Ground"  || collision.gameObject.tag == "Wall"||collision.gameObject.tag=="Enemy"
+            ||collision.gameObject.tag=="SnowBall")
         {
             GetComponent<Rigidbody2D>().gravityScale = 0;
             GetComponent<Rigidbody2D>().mass = 0;
             GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-
             GetComponent<Animator>().SetBool("isDestroy", true);
+            if (collision.gameObject.tag=="Enemy")
+            collision.gameObject.SendMessage("Damage", dmg);
+            gameObject.layer = 14;
         }
             
     }

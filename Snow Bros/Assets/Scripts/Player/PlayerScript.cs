@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class PlayerScript : MonoBehaviour {
 
-
+    // State Number
     public const int STATE_IDLE = 0;
     public const int STATE_WALK = 1;
     public const int STATE_JUMP = 2;
@@ -18,6 +18,7 @@ public class PlayerScript : MonoBehaviour {
     public const int STATE_RESPAWN = 10;
     public const int STATE_RUNTHROW = 11;
 
+    // object
     public Rigidbody2D playerBody;
     private Animator playerAnimator;
     public Transform shootPoint;
@@ -29,13 +30,16 @@ public class PlayerScript : MonoBehaviour {
     public AudioClip audio_throw,audio_respawn,audio_jump;
     public AudioSource audioPlayer;
 
-
+    //Thông số giới hạn vận tốc, biến ktra chạm đất
     public float jumpForce ;
     public float moveForce ;
     public float maxVelocity ;
     public bool grounded = false;
 
-    public float timeImmortal = 5.0f;
+    // Chỉ số nhân vật
+    public int currentHealth;
+    public int maxHealth;
+    public float timeImmortal = 1.0f;
 
     public bool isMoveLeft, isMoveRight, isShoot, isJump;
 
@@ -48,16 +52,22 @@ public class PlayerScript : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
-        Player_LoadData();
+        //Player_LoadData();
         GlobalControl.CurrentScene = SceneManager.GetActiveScene().buildIndex;
         audioPlayer = GetComponent<AudioSource>();
+        currentHealth = maxHealth;
     }
     // Update is called once per frame
     void FixedUpdate() {
+        if (playerAnimator.GetInteger("CurrentState") >= STATE_DIE) return;
         //Keyboard_Move();
         GlobalControl.Score++;
         Keyboard_Move();
-
+        timeImmortal -= Time.deltaTime;
+        if (currentHealth<=0)
+        {
+            Death();
+        }
         if (Input.GetKey(KeyCode.Space)) SceneManager.LoadScene("TransitionScene");
        
     }
@@ -79,6 +89,11 @@ public class PlayerScript : MonoBehaviour {
 
             }
         }
+
+       if (target.gameObject.tag=="Enemy")
+        {
+            StartCoroutine(Flasher());
+        }
     }
 
     void OnCollisionExit2D(Collision2D target)
@@ -95,6 +110,12 @@ public class PlayerScript : MonoBehaviour {
         {
             playerAnimator.SetInteger("CurrentState", STATE_PUSH);
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Snowball" || collision.gameObject.tag == "EnemyBullet")
+            Debug.Log("Player collision with " + collision.gameObject.tag);
     }
 
     void Keyboard_Move()
@@ -220,16 +241,51 @@ public class PlayerScript : MonoBehaviour {
 
         yield return new WaitForSeconds(.1f);
     }
-    public void Player_LoadData()
+
+    public void Death()
     {
-        moveForce = GlobalControl.moveForce;
-        jumpForce = GlobalControl.jumpForce;
-        maxVelocity = GlobalControl.maxVelocity;
+        playerAnimator.SetInteger("CurrentState", STATE_DIE);
     }
-    public void Player_SaveData()
+
+    public void Damage(int dmg)
     {
-        GlobalControl.moveForce=moveForce ;
-        GlobalControl.jumpForce= jumpForce  ;
-        GlobalControl.maxVelocity= maxVelocity  ;
+
+        if (timeImmortal <= 0)
+        {
+            currentHealth -= dmg;
+            timeImmortal = 1.0f;
+            if (currentHealth > 0 )GetComponent<Animation>().Play("FlashWhenDamaged");
+        }
+    }
+    IEnumerator Flasher()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            //renderer.material.color = collideColor;
+            //yield return new WaitForSeconds(.1f);
+            //renderer.material.color = normalColor;
+            yield return new WaitForSeconds(.1f);
+        }
+    }
+
+    public void KnockBack()
+    {
+        playerBody.AddForce(new Vector2(-650.0f * transform.localScale.x, 650.0f));
+        Debug.Log("KnockBack");
+    }
+
+    public void CollectItem(string itemName)
+    {
+        switch (itemName)
+        {
+            case "Coin":
+                break;
+            case "Heart":
+                break;
+            case "SilverKey":
+                break;
+            case "GoldenKey":
+                break;
+        }
     }
 }
