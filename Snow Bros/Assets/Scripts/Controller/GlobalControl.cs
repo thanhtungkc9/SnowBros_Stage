@@ -11,17 +11,24 @@ public class GlobalControl : MonoBehaviour
     public static bool isPaused = false;
 
     //Player Information
-    public static int DeathCount = 0;
-    public static int Score = 0;
+    public static int Lives = 3;
     public static float maxVelocity = 3.0f;     //4.5f with Item
     public static float jumpForce = 1700.0f;
     public static float moveForce = 150.0f;
+    public static Vector2 respawnPoint;
+
+    public static int numBlueKey = 0;
+
+    public static int preScore = 0;
+    public static int Score = 0;
+
+    public static int numGoldenKey = 0;
+    public static int preGoldenKey = 0;
+    public static int maxGoldenKey = 5;
+
 
     //PlayerBullet
-    public static float mass = 0.3f;        //0.2 with Item
-    public static float timeExist = 0.4f;   // 0.6 with Item
-    public static int damage = 1;          //15 with Item
-    public static string spriteName = "SmallBullet"; // BigBullet with Item
+    public static bool isPowerUp = false;
 
     //Scene Information
     public static int CurrentScene = 0;
@@ -41,6 +48,7 @@ public class GlobalControl : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        respawnPoint = GameObject.FindGameObjectWithTag("Player").transform.position;
     }
     public void Player_SpeedItem()
     {
@@ -48,25 +56,26 @@ public class GlobalControl : MonoBehaviour
     }
     public void Player_PowerItem()
     {
-        damage = 2;
-        spriteName = "BigBullet";
+        isPowerUp = true;
     }
-    public void Player_RangeItem()
-    {
-        mass = 0.2f;
-        timeExist = 0.6f;
-    }
+
     public void Player_ResetItem()
     {
         moveForce = 150.0f;
-        mass = 0.3f;
-        timeExist = 0.4f;
-        damage = 10;
-        spriteName = "SmallBullet";
+        isPowerUp = false;
+    }
+    public void ResetItem()
+    {
+        numBlueKey = 0;
+        numGoldenKey = preGoldenKey;
+        Score = preScore;
     }
     public void Score_Add(int bonus)
     {
         Score += bonus;
     }
+
+   
+
 
 }

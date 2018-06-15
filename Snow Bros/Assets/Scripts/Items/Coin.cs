@@ -19,6 +19,7 @@ public class Coin : MonoBehaviour {
     {
         if (collision.gameObject.tag=="Player")
         {
+            collision.gameObject.SendMessage("CollectItem", "Coin");
             Vector2 position = gameObject.transform.position;
             Destroy(gameObject);
             GameObject tmp= Instantiate(effectCollected, position, Quaternion.identity);

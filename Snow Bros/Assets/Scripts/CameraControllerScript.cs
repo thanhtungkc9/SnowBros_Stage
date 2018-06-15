@@ -13,7 +13,7 @@ public class CameraControllerScript : MonoBehaviour
 
     private Vector3 min, max;
 
-    public bool isFollowing;
+    public static bool isFollowing;
 
 
     void Awake()
@@ -21,7 +21,10 @@ public class CameraControllerScript : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         transform.position = new Vector3(player.position.x, player.position.y, transform.position.z);
     }
-
+    public static void SetFollowing(bool IsFollow)
+    {
+        isFollowing = IsFollow;
+    }
     void Start()
     {
         min = cameraBounds.bounds.min;
@@ -34,6 +37,10 @@ public class CameraControllerScript : MonoBehaviour
 
     void Update()
     {
+        min = cameraBounds.bounds.min;
+        max = cameraBounds.bounds.max;
+        mainCamera = GetComponent<Camera>();
+        //
         var x = transform.position.x;
         var y = transform.position.y;
 

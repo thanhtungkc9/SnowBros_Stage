@@ -15,20 +15,20 @@ public class PlayerWalkBehaviour : StateMachineBehaviour {
         Transform transform = animator.GetComponent<PlayerScript>().transform;
         if (h == 0&& (animator.GetComponent<PlayerScript>().isMoveLeft==false&& animator.GetComponent<PlayerScript>().isMoveRight==false))
         {
-            animator.SetInteger("CurrentState", PlayerScript.STATE_IDLE);
+            animator.SetInteger("CurrentState", animator.GetComponent<PlayerScript>().STATE_IDLE);
         }
         if (Input.GetKey(KeyCode.J) || Input.GetKeyDown(KeyCode.J) || animator.GetComponent<PlayerScript>().isShoot)
         {
 
-            animator.SetInteger("CurrentState", PlayerScript.STATE_RUNTHROW);
+            animator.SetInteger("CurrentState", animator.GetComponent<PlayerScript>().STATE_THROW);
         }
         else if (Input.GetKeyDown(KeyCode.K) || animator.GetComponent<PlayerScript>().isJump)
         {
 
-            if (animator.GetComponent<PlayerScript>().grounded && animator.GetInteger("CurrentState") != PlayerScript.STATE_JUMP)
+            if (animator.GetComponent<PlayerScript>().grounded && animator.GetInteger("CurrentState") != animator.GetComponent<PlayerScript>().STATE_JUMP)
             {
-                animator.GetComponent<PlayerScript>().grounded = false;
-                animator.SetInteger("CurrentState",PlayerScript. STATE_JUMP);
+                //animator.GetComponent<PlayerScript>().grounded = false;
+                animator.SetInteger("CurrentState", animator.GetComponent<PlayerScript>(). STATE_JUMP);
             }
         }
     }

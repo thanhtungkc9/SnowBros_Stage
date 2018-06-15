@@ -17,8 +17,8 @@ public class PlayerIdleBehaviour : StateMachineBehaviour {
         float h = Input.GetAxisRaw("Horizontal");
         if (h != 0||animator.GetComponent<PlayerScript>().isMoveLeft==true|| animator.GetComponent<PlayerScript>().isMoveRight==true)
         {
-                if (animator.GetInteger("CurrentState") != PlayerScript.STATE_WALK)
-                    animator.SetInteger("CurrentState", PlayerScript.STATE_WALK);
+                if (animator.GetInteger("CurrentState") != animator.GetComponent<PlayerScript>().STATE_WALK)
+                    animator.SetInteger("CurrentState", animator.GetComponent<PlayerScript>().STATE_WALK);
              
         }
 
@@ -27,16 +27,16 @@ public class PlayerIdleBehaviour : StateMachineBehaviour {
         {
 
             {
-                animator.SetInteger("CurrentState", PlayerScript.STATE_THROW);
+                animator.SetInteger("CurrentState", animator.GetComponent<PlayerScript>().STATE_THROW);
             }
 
         }
         else if (Input.GetKeyDown(KeyCode.K) || animator.GetComponent<PlayerScript>().isJump)
         {
-            if (animator.GetComponent<PlayerScript>().grounded && animator.GetInteger("CurrentState") != PlayerScript.STATE_JUMP)
+            if (animator.GetComponent<PlayerScript>().grounded && animator.GetInteger("CurrentState") != animator.GetComponent<PlayerScript>().STATE_JUMP)
             {
-                animator.GetComponent<PlayerScript>().grounded = false;
-                animator.SetInteger("CurrentState", PlayerScript.STATE_JUMP);
+                //animator.GetComponent<PlayerScript>().grounded = false;
+                animator.SetInteger("CurrentState", animator.GetComponent<PlayerScript>().STATE_JUMP);
             }
         }
     }

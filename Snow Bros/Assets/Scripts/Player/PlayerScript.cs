@@ -5,18 +5,18 @@ using UnityEngine.SceneManagement;
 public class PlayerScript : MonoBehaviour {
 
     // State Number
-    public const int STATE_IDLE = 0;
-    public const int STATE_WALK = 1;
-    public const int STATE_JUMP = 2;
-    public const int STATE_THROW = 3;
-    public const int STATE_PUSH = 4;
-    public const int STATE_KICK = 5;
-    public const int STATE_RUNPUSH = 6;
-    public const int STATE_RUN = 7;
-    public const int STATE_FLY = 8;
-    public const int STATE_DIE = 9;
-    public const int STATE_RESPAWN = 10;
-    public const int STATE_RUNTHROW = 11;
+    public int STATE_IDLE = 0;
+    public int STATE_WALK = 1;
+    public int STATE_JUMP = 2;
+    public int STATE_THROW = 3;
+    public int STATE_PUSH = 4;
+    public int STATE_KICK = 5;
+    public int STATE_RUNPUSH = 6;
+    public int STATE_RUN = 7;
+    public int STATE_FLY = 8;
+    public int STATE_DIE = 9;
+    public int STATE_RESPAWN = 10;
+    public int STATE_RUNTHROW = 11;
 
     // object
     public Rigidbody2D playerBody;
@@ -24,6 +24,10 @@ public class PlayerScript : MonoBehaviour {
     public Transform shootPoint;
     [SerializeField]
     private GameObject bullet;
+
+    [SerializeField]
+    private Transform groundCheck, wallCheck;
+    public LayerMask groundLayer;
 
     //Sound
     [SerializeField]
@@ -34,12 +38,13 @@ public class PlayerScript : MonoBehaviour {
     public float jumpForce ;
     public float moveForce ;
     public float maxVelocity ;
-    public bool grounded = false;
+    public bool grounded = false,walled=false;
 
     // Chỉ số nhân vật
     public int currentHealth;
     public int maxHealth;
     public float timeImmortal = 1.0f;
+    public bool isWallJumped = false;
 
     public bool isMoveLeft, isMoveRight, isShoot, isJump;
 
@@ -59,9 +64,23 @@ public class PlayerScript : MonoBehaviour {
     }
     // Update is called once per frame
     void FixedUpdate() {
+       
+        if (Physics2D.IsTouchingLayers(groundCheck.GetComponent<BoxCollider2D>(), groundLayer))
+        {
+            grounded = true;
+            isWallJumped = false;
+          
+        }
+        else
+            grounded = false;
+
+        if (Physics2D.IsTouchingLayers(wallCheck.GetComponent<BoxCollider2D>(), LayerMask.GetMask("Wall")))
+            walled = true;
+        else
+            walled = false;
+
         if (playerAnimator.GetInteger("CurrentState") >= STATE_DIE) return;
-        //Keyboard_Move();
-        GlobalControl.Score++;
+
         Keyboard_Move();
         timeImmortal -= Time.deltaTime;
         if (currentHealth<=0)
@@ -74,9 +93,9 @@ public class PlayerScript : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D target)
     {      
-        if ((target.gameObject.tag == "Ground" || target.gameObject.tag == "Freeze4") && playerBody.velocity.y < 0.1f)
+        /*if ((target.gameObject.tag == "Ground") && playerBody.velocity.y < 0.1f)
         {
-            grounded = true;
+            //grounded = true;
             float h = Input.GetAxisRaw("Horizontal");
              if (h != 0&&isMoveLeft==false&&isMoveRight==false)
             {
@@ -88,20 +107,16 @@ public class PlayerScript : MonoBehaviour {
                 playerAnimator.SetInteger("CurrentState", STATE_IDLE);
 
             }
-        }
-
-       if (target.gameObject.tag=="Enemy")
-        {
-            StartCoroutine(Flasher());
-        }
+        }*/
     }
 
     void OnCollisionExit2D(Collision2D target)
     {
+        /*
         if ((target.gameObject.tag=="Ground" || target.gameObject.tag == "Freeze4") && playerBody.velocity.y < -0.2f)
         {
             grounded = false;
-        }        
+        }   */     
     }
     void OnCollisionStay2D(Collision2D target)
     {
@@ -114,11 +129,33 @@ public class PlayerScript : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Snowball" || collision.gameObject.tag == "EnemyBullet")
-            Debug.Log("Player collision with " + collision.gameObject.tag);
+        if ((collision.gameObject.tag == "Ground") )
+        {
+            //grounded = true;
+            float h = Input.GetAxisRaw("Horizontal");
+            if (h != 0 && isMoveLeft == false && isMoveRight == false)
+            {
+                playerAnimator.SetInteger("CurrentState", STATE_WALK);
+            }
+            else
+            {
+
+                playerAnimator.SetInteger("CurrentState", STATE_IDLE);
+
+            }
+        }
+         if (collision.gameObject.tag=="CheckPoint")
+        {
+            GlobalControl.respawnPoint = collision.transform.position;
+            ;
+        }
     }
 
-    void Keyboard_Move()
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+       
+    }
+    public void Keyboard_Move()
     {
         int currentState = playerAnimator.GetInteger("CurrentState");
         if (currentState == STATE_DIE || currentState == STATE_RESPAWN || currentState == STATE_FLY)
@@ -228,7 +265,7 @@ public class PlayerScript : MonoBehaviour {
         if (grounded &&playerAnimator.GetInteger("CurrentState") != STATE_JUMP)
         {
             grounded = false;
-            audioPlayer.PlayOneShot(audio_jump);
+            //audioPlayer.PlayOneShot(audio_jump);
             playerAnimator.SetInteger("CurrentState", STATE_JUMP);
         }
     }
@@ -241,7 +278,12 @@ public class PlayerScript : MonoBehaviour {
 
         yield return new WaitForSeconds(.1f);
     }
-
+    
+    //Ham Attack gan vao Event trong Animator;
+    public void Attackk()
+    {
+        StartCoroutine(Attack());
+    }
     public void Death()
     {
         playerAnimator.SetInteger("CurrentState", STATE_DIE);
@@ -252,7 +294,7 @@ public class PlayerScript : MonoBehaviour {
 
         if (timeImmortal <= 0)
         {
-            currentHealth -= dmg;
+            currentHealth = Mathf.Max(currentHealth- dmg,0);
             timeImmortal = 1.0f;
             if (currentHealth > 0 )GetComponent<Animation>().Play("FlashWhenDamaged");
         }
@@ -270,7 +312,7 @@ public class PlayerScript : MonoBehaviour {
 
     public void KnockBack()
     {
-        playerBody.AddForce(new Vector2(-650.0f * transform.localScale.x, 650.0f));
+        playerBody.AddForce(new Vector2(-900.0f * transform.localScale.x, 900.0f));
         Debug.Log("KnockBack");
     }
 
@@ -279,12 +321,31 @@ public class PlayerScript : MonoBehaviour {
         switch (itemName)
         {
             case "Coin":
+                Debug.Log("Coin");
+                GlobalControl.Score += 50;
                 break;
-            case "Heart":
+            case "HealthHeart":
+                Debug.Log("HealthHeart");
+                currentHealth = Mathf.Min(currentHealth + 1, maxHealth);
                 break;
-            case "SilverKey":
+            case "BlueKey":
+                Debug.Log("BlueKey");
+                GlobalControl.numBlueKey += 1;
                 break;
             case "GoldenKey":
+                Debug.Log("GoldenKey");
+                GlobalControl.numGoldenKey += 1;
+                break;
+            case "PowerItem":
+                Debug.Log("PowerItem");
+                GlobalControl.isPowerUp = true;
+                break;
+            case "SpeedItem":
+                Debug.Log("SpeedItem");
+                maxVelocity =maxVelocity* 1.5f;
+                break;
+            case "Diamond":
+                GlobalControl.Score += 300;
                 break;
         }
     }

@@ -12,6 +12,9 @@ TagManager:
   - EnemyBullet
   - SnowBall
   - MovingPlatform
+  - Boss
+  - CameraBound
+  - CheckPoint
   layers:
   - Default
   - TransparentFX
@@ -28,7 +31,7 @@ TagManager:
   - EnemyNotColWithPlayer
   - Player
   - Destroyed
-  - JumpPosition
+  - Wall
   - 
   - 
   - 

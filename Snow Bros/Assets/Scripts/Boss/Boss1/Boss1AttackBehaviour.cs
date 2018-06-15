@@ -16,11 +16,8 @@ public class Boss1AttackBehaviour : StateMachineBehaviour {
 
 	// OnStateExit is called when a transition ends and the state machine finishes evaluating this state
 	override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-        Vector2 position = animator.GetComponent<AI_Boss1>().boss1Body.position;
-        position.y += 5;
-        position.x -= 2 ;
-        Instantiate(animator.GetComponent<AI_Boss1>().enemyBoss1, position, Quaternion.identity);
-        
+        //animator.GetComponent<AI_Boss1>().Attack1();
+
     }
 
 	// OnStateMove is called right after Animator.OnAnimatorMove(). Code that processes and affects root motion should be implemented here

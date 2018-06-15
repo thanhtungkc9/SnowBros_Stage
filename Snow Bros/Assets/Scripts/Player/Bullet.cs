@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour {
 
-    public float speed = 8f;
+    public float speed = 4f;
     public int dmg = 1;
-    public float forceX=120.0f;
-    public float forceY=15.0f;
+    public float forceX=100.0f;
+    public float forceY=30.0f;
     public float timeExist = 0.4f;
     public Sprite bigBullet;
 
@@ -50,24 +50,11 @@ public class Bullet : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        StartCoroutine(Fly());
+ 
       
     }
 
-    IEnumerator Fly()
-    {
-        if (direction)
-        {
-
-            
-        }
-        else
-        {
-
-            
-        }
-        yield return new WaitForSeconds(.2f);
-    }
+ 
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -85,11 +72,32 @@ public class Bullet : MonoBehaviour {
             
     }
 
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Wall" || collision.gameObject.tag == "Enemy"
+              || collision.gameObject.tag == "SnowBall")
+        {
+            GetComponent<Rigidbody2D>().gravityScale = 0;
+            GetComponent<Rigidbody2D>().mass = 0;
+            GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+            GetComponent<Animator>().SetBool("isDestroy", true);
+            if (collision.gameObject.tag == "Enemy")
+                collision.gameObject.SendMessage("Damage", dmg);
+            gameObject.layer = 14;
+        }
+
+    }
     private void Bullet_LoadData()
     {
-        dmg = GlobalControl.damage;
-        timeExist = GlobalControl.timeExist;
-        GetComponent<Rigidbody2D>().mass = GlobalControl.mass;
-        if (GlobalControl.spriteName=="BigBullet") GetComponent<SpriteRenderer>().sprite=bigBullet;
+       if (GlobalControl.isPowerUp==false)
+        {
+            dmg = 1;
+
+        }
+       else
+        {
+            dmg = 2;
+            forceX = 150.0f;
+        }
     }
 }

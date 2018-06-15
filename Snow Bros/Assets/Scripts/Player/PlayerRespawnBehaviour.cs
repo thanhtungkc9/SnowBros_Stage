@@ -6,7 +6,9 @@ public class PlayerRespawnBehaviour : StateMachineBehaviour {
 
 	 // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-           
+        animator.GetComponent<PlayerScript>().transform.parent = null;
+        //animator.GetComponent<PlayerScript>().transform.position = GlobalControl.respawnPoint;
+     
     }
 
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -20,6 +22,8 @@ public class PlayerRespawnBehaviour : StateMachineBehaviour {
         animator.SetInteger("CurrentState", 0);
         animator.GetComponent<PlayerScript>().timeImmortal = 1;
         animator.GetComponent<PlayerScript>().currentHealth = animator.GetComponent<PlayerScript>().maxHealth;
+        GlobalControl.Lives -= 1;
+        animator.GetComponent<PlayerScript>().maxVelocity = GlobalControl.maxVelocity;
 
     }
 

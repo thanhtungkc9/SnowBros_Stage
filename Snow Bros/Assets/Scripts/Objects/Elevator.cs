@@ -11,6 +11,9 @@ public class Elevator : MonoBehaviour {
     private int changeDirection = -1;
     private float constantX;
 
+    [SerializeField]
+    GameObject switch_Elevator;
+
     private float timeChangeDirection = 0.0f;
     public float timeReset = 0;
 	// Use this for initialization
@@ -30,11 +33,8 @@ public class Elevator : MonoBehaviour {
             velocity *= changeDirection;
             timeChangeDirection = 1.0f;
         }
-        transform.position = new Vector2( transform.position.x, velocity * Time.deltaTime + transform.position.y);
-        //GetComponent<Rigidbody2D>().velocity = new Vector2(velocity, 0);
-
-
-
+       if (switch_Elevator.GetComponent<Animator>().GetBool("IsOn")&&switch_Elevator!=null)
+            transform.position = new Vector2( transform.position.x, velocity * Time.deltaTime + transform.position.y);
     }
     private void OnCollisionStay2D(Collision2D collision)
     {

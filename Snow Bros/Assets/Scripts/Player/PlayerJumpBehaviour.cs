@@ -7,18 +7,50 @@ public class PlayerJumpBehaviour : StateMachineBehaviour {
 	 // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
         animator.GetComponent<PlayerScript>().playerBody.AddForce(new Vector2(0, GlobalControl.jumpForce));
-        animator.GetComponent<PlayerScript>().audioPlayer.PlayOneShot(animator.GetComponent<PlayerScript>().audio_jump);
-
+ 
+        // animator.GetComponent<PlayerScript>().audioPlayer.PlayOneShot(animator.GetComponent<PlayerScript>().audio_jump);
+        Debug.Log("Jump");
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-        
+        /*
+        float h = Input.GetAxisRaw("Horizontal");
+        if (h != 0 && animator.GetComponent<PlayerScript>().isMoveLeft == false && animator.GetComponent<PlayerScript>().isMoveRight == false
+            && animator.GetComponent<PlayerScript>().grounded)
+        {
+            animator.SetInteger("CurrentState", animator.GetComponent<PlayerScript>().STATE_WALK);
+        }
+        else
+        {
+
+            animator.SetInteger("CurrentState", animator.GetComponent<PlayerScript>().STATE_IDLE);
+
+        }*/
         if (Input.GetKey(KeyCode.J) || animator.GetComponent<PlayerScript>().isShoot)
         {
 
             {
-                animator.SetInteger("CurrentState", PlayerScript.STATE_THROW);
+                animator.SetInteger("CurrentState", animator.GetComponent<PlayerScript>().STATE_THROW);
+            }
+
+        }
+        animator.GetComponent<PlayerScript>().Keyboard_Move();
+        if (Input.GetKeyDown(KeyCode.K)
+            //|| animator.GetComponent<PlayerScript>().isJump
+            && animator.GetComponent<PlayerScript>().walled
+            && animator.GetComponent<PlayerScript>().playerBody.velocity.y<0.0f
+            && animator.GetComponent<PlayerScript>().isWallJumped==false)
+        {
+            {
+               // animator.GetComponent<PlayerScript>().playerBody.AddForce(new Vector2(0, GlobalControl.jumpForce));
+                animator.Play("Jump", -1, 0.0f);
+                animator.GetComponent<PlayerScript>().isWallJumped = true;
+               // Debug.Log("Jump in Jump");
+
+                //animator.GetComponent<PlayerScript>().playerBody.AddForce(new Vector2(0, GlobalControl.jumpForce/2));
+                //animator.SetInteger("CurrentState", animator.GetComponent<PlayerScript>().STATE_JUMP);
+                //animator.SetInteger("CurrentState", animator.GetComponent<PlayerScript>().STATE_JUMP);
             }
 
         }

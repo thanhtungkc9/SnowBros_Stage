@@ -51,8 +51,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1198349381722390}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.563938, y: -1.9676028, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 11.914632, y: -7.357888, z: 0.06515577}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children:
   - {fileID: 4845207463701030}
@@ -130,6 +130,7 @@ MonoBehaviour:
   positionThrow: {fileID: 4845207463701030}
   rangeX: 7
   rangeY: 2.6
+  currentHealth: 3
 --- !u!212 &212750102441464840
 SpriteRenderer:
   m_ObjectHideFlags: 1

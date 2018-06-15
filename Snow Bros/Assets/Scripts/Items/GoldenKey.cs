@@ -21,6 +21,7 @@ public class GoldenKey : MonoBehaviour {
     {
         if (collision.gameObject.tag == "Player")
         {
+            collision.gameObject.SendMessage("CollectItem", "GoldenKey");
             Vector2 position = gameObject.transform.position;
             Destroy(gameObject);
             GameObject tmp = Instantiate(effectCollected, position, Quaternion.identity);

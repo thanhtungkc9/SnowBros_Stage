@@ -20,6 +20,7 @@ public class HealthHeart : MonoBehaviour {
     {
         if (collision.gameObject.tag == "Player")
         {
+            collision.gameObject.SendMessage("CollectItem", "HealthHeart");
             Vector2 position = gameObject.transform.position;
             Destroy(gameObject);
             GameObject tmp = Instantiate(effectCollected, position, Quaternion.identity);

@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 61819304868860198}
   - component: {fileID: 114911545813121262}
   - component: {fileID: 50340885451560566}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FloattingGround
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -108,7 +108,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1056616587400260}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.5158577, y: -1.9242947, z: -0.07286405}
+  m_LocalPosition: {x: 32.34, y: -14.91, z: -0.07286405}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4170879341037770}
@@ -124,7 +124,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1540865951551632}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 14.9416275, y: 9.409276, z: 0.07286405}
+  m_LocalPosition: {x: 17.66, y: 9.409276, z: 0.07286405}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4240455477936540}
@@ -162,7 +162,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.010601997, y: 0.07533717}
+  m_Offset: {x: 0, y: 0.095490456}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -173,7 +173,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.72434235, y: 0.7227521}
+  m_Size: {x: 1, y: 0.8090191}
   m_EdgeRadius: 0
 --- !u!114 &114911545813121262
 MonoBehaviour:

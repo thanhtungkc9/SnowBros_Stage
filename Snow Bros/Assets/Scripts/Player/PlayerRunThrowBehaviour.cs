@@ -18,7 +18,7 @@ public class PlayerRunThrowBehaviour : StateMachineBehaviour {
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
         animator.GetComponent<PlayerScript>().StartCoroutine(animator.GetComponent<PlayerScript>().Attack());
         Debug.Log(stateInfo);     
-        animator.SetInteger("CurrentState", PlayerScript.STATE_WALK);
+        animator.SetInteger("CurrentState", animator.GetComponent<PlayerScript>().STATE_WALK);
 
        
     }

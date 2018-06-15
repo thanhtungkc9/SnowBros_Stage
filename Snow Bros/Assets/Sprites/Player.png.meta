@@ -165,10 +165,10 @@ TextureImporter:
     21300320: Player_164
     21300322: Player_165
     21300324: Player_166
-    21300326: Player_168
-    21300328: Player_169
-    21300330: Player_170
-    21300332: Player_171
+    21300326: SnowBallBonus_1
+    21300328: SnowBallBonus_2
+    21300330: SnowBallBonus_3
+    21300332: SnowBallBonus_4
     21300334: Player_172
     21300336: Player_173
     21300338: Player_174
@@ -191,10 +191,10 @@ TextureImporter:
     21300372: Player_192
     21300374: Player_193
     21300376: Player_194
-    21300378: Player_195
-    21300380: Player_196
-    21300382: Player_197
-    21300384: Player_198
+    21300378: PowerItem_1
+    21300380: PowerItem_2
+    21300382: SpeedItem_1
+    21300384: SpeedItem_2
     21300386: Player_199
     21300388: Player_200
     21300390: Player_201
@@ -3557,15 +3557,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_168
+      name: SnowBallBonus_1
       rect:
         serializedVersion: 2
-        x: 357
+        x: 355
         y: 96
-        width: 25
+        width: 30
         height: 30
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -3577,7 +3577,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_169
+      name: SnowBallBonus_2
       rect:
         serializedVersion: 2
         x: 390
@@ -3597,7 +3597,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_170
+      name: SnowBallBonus_3
       rect:
         serializedVersion: 2
         x: 424
@@ -3617,7 +3617,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_171
+      name: SnowBallBonus_4
       rect:
         serializedVersion: 2
         x: 457
@@ -4077,7 +4077,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_195
+      name: PowerItem_1
       rect:
         serializedVersion: 2
         x: 411
@@ -4097,7 +4097,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_196
+      name: PowerItem_2
       rect:
         serializedVersion: 2
         x: 429
@@ -4117,7 +4117,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_197
+      name: SpeedItem_1
       rect:
         serializedVersion: 2
         x: 471
@@ -4137,7 +4137,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_198
+      name: SpeedItem_2
       rect:
         serializedVersion: 2
         x: 489

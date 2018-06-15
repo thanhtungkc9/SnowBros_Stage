@@ -4,21 +4,39 @@ using UnityEngine;
 
 public class PlayerThrowBehaviour : StateMachineBehaviour {
 
-	 // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
-	//override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-	//
-	//}
+    // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
+    override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
+        if (Input.GetKeyDown(KeyCode.K) || animator.GetComponent<PlayerScript>().isJump)
+        {
 
-	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
-	//override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-	//
-	//}
+            if (animator.GetComponent<PlayerScript>().grounded && animator.GetInteger("CurrentState") != animator.GetComponent<PlayerScript>().STATE_JUMP)
+            {
+                //animator.GetComponent<PlayerScript>().grounded = false;
+                animator.SetInteger("CurrentState", animator.GetComponent<PlayerScript>().STATE_JUMP);
+            }
+        }
+    }
+
+    // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
+    override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        if (Input.GetKeyDown(KeyCode.K) || animator.GetComponent<PlayerScript>().isJump)
+        {
+
+            if (animator.GetComponent<PlayerScript>().grounded && animator.GetInteger("CurrentState") != animator.GetComponent<PlayerScript>().STATE_JUMP)
+            {
+                //animator.GetComponent<PlayerScript>().grounded = false;
+                animator.SetInteger("CurrentState", animator.GetComponent<PlayerScript>().STATE_JUMP);
+                Debug.Log("JumpWhenTHROW");
+            }
+        }
+    }
 
 	// OnStateExit is called when a transition ends and the state machine finishes evaluating this state
 	override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
         //
-        animator.SetInteger("CurrentState", PlayerScript.STATE_IDLE);
-        animator.GetComponent<PlayerScript>().StartCoroutine(animator.GetComponent<PlayerScript>().Attack());
+        animator.SetInteger("CurrentState", animator.GetComponent<PlayerScript>().STATE_IDLE);
+       // animator.GetComponent<PlayerScript>().StartCoroutine(animator.GetComponent<PlayerScript>().Attack());
 }
 
 	// OnStateMove is called right after Animator.OnAnimatorMove(). Code that processes and affects root motion should be implemented here

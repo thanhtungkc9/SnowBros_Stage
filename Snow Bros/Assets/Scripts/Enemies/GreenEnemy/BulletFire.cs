@@ -70,7 +70,6 @@ public class BulletFire : MonoBehaviour {
     {
         if(collision.gameObject.tag == "Wall" || collision.gameObject.tag == "Player")
         {
-            Debug.Log("BulletFire collision with "+collision.gameObject.tag);
            if (collision.gameObject.tag=="Player")
                 collision.gameObject.SendMessage("Damage", 1);
             Destroy(gameObject);

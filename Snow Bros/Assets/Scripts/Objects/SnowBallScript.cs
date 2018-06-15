@@ -14,6 +14,7 @@ public class SnowBallScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        transform.localScale = new Vector3(1, 1, 1);
         if (grounded)
         {
             if (GetComponent<Rigidbody2D>().velocity.x < maxVelocity)
@@ -35,6 +36,8 @@ public class SnowBallScript : MonoBehaviour {
     {
         if (collision.gameObject.tag == "Ground")
             grounded = true;
+        else if (collision.gameObject.tag=="Wall")
+            Destroy(gameObject);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -44,6 +47,7 @@ public class SnowBallScript : MonoBehaviour {
             collision.gameObject.SendMessage("Damage", 1);
             Destroy(gameObject);
         }
+        
     }
     private void OnCollisionExit2D(Collision2D collision)
     {

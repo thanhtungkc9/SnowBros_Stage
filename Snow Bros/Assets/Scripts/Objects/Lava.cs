@@ -20,4 +20,11 @@ public class Lava : MonoBehaviour {
             collision.gameObject.SendMessage("Damage", 5);
         }
     }
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            collision.gameObject.SendMessage("Damage", 5);
+        }
+    }
 }

@@ -8,14 +8,16 @@ public class FireMachineGun : MonoBehaviour {
     public bool rightToLeft = false;
     public bool isPlayerInRange=false;
 
+    private float timeFireTemp;
     [SerializeField]
     GameObject fire;
     [SerializeField]
     Transform positionFire;
 	// Use this for initialization
 	void Start () {
-		
-	}
+        timeFireTemp = timeFire;
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -23,7 +25,8 @@ public class FireMachineGun : MonoBehaviour {
         {
             GameObject tmp= Instantiate(fire, positionFire.position, Quaternion.identity);
             tmp.transform.localScale = gameObject.transform.localScale;
-            timeFire = 2.0f;
+            tmp.transform.rotation = gameObject.transform.rotation;
+            timeFire = timeFireTemp;
         }
         else
             timeFire -= Time.deltaTime;   }
