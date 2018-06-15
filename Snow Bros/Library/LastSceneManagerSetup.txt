@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/Stage2.unity
+- path: Assets/Scenes/StageFindPrincess.unity
   isLoaded: 1
   isActive: 1

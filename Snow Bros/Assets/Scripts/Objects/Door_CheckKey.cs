@@ -5,16 +5,25 @@ using UnityEngine;
 public class Door_CheckKey : MonoBehaviour {
     public  GameObject player;
 
+    public AudioClip open,close;
+    public AudioSource audioPlayer;
+    bool isClosed = false;
+    public bool closeWhenPlayerWalkThrough = true;
     void Start () {
         player = GameObject.FindGameObjectWithTag("Player");
-    
+        audioPlayer = GetComponent<AudioSource>();
 }
 
 // Update is called once per frame
     void Update() {
-        if (player.transform.position.x >transform.position.x)
+        if (player.transform.position.x > transform.position.x && isClosed == false
+            && closeWhenPlayerWalkThrough
+            && Mathf.Abs(player.transform.position.y - transform.position.y) < 3.0f
+            )
         {
             gameObject.transform.parent.GetComponent<Animator>().SetBool("isOpen", false);
+            audioPlayer.PlayOneShot(close);
+            isClosed = true;
         }
     }
 
@@ -26,6 +35,7 @@ public class Door_CheckKey : MonoBehaviour {
         {
             Transform door = gameObject.transform.parent;
             door.GetComponent<Animator>().SetBool("isOpen", true);
+            audioPlayer.PlayOneShot(open);
             GlobalControl.numBlueKey -= 1;
         }
     }

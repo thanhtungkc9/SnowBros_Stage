@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Fire : MonoBehaviour {
 
-	// Use this for initialization
+    // Use this for initialization
 	void Start () {
         Destroy(gameObject, 0.5f);
 	}

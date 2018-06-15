@@ -6,15 +6,23 @@ using UnityEngine.UI;
 public class EventController : MonoBehaviour {
 
     [SerializeField]
-    private Image menu;
+    public Image menu;
 
     private void Start()
     {
 
     }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (GlobalControl.isPaused == false) ShowMenu();
+            HideMenu();
+        }
+    }
     public void OnPlayButtonClick()
     {
-        SceneController.LoadScene("Stage1-1");
+        SceneController.LoadScene("Stage2");
     }
     public void OnScoresButtonClick()
     {
@@ -27,7 +35,7 @@ public class EventController : MonoBehaviour {
 
     public void OnStage1ButtonClick()
     {
-        SceneController.LoadScene("Stage1-1");
+        SceneController.LoadScene("Stage1");
     }
 
     public void BackToMenuScene()
@@ -40,13 +48,13 @@ public class EventController : MonoBehaviour {
     }
     public void ShowMenu()
     {
-        menu.gameObject.active = true;
+        menu.gameObject.SetActive(true);
         Time.timeScale = 0;
         GlobalControl.isPaused = true;
     }
     public void HideMenu()
     {
-        menu.gameObject.active = false;
+        menu.gameObject.SetActive(false);
         Time.timeScale = 1;
         GlobalControl.isPaused = false;
     }

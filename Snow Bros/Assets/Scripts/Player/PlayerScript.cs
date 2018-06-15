@@ -31,7 +31,8 @@ public class PlayerScript : MonoBehaviour {
 
     //Sound
     [SerializeField]
-    public AudioClip audio_throw,audio_respawn,audio_jump;
+    public AudioClip audio_throw,audio_respawn,audio_jump,audio_collectCoin,audio_collectHealth,audio_collectKey,audio_collectDiamond,
+        audio_collect1UP,audio_die;
     public AudioSource audioPlayer;
 
     //Thông số giới hạn vận tốc, biến ktra chạm đất
@@ -83,9 +84,10 @@ public class PlayerScript : MonoBehaviour {
 
         Keyboard_Move();
         timeImmortal -= Time.deltaTime;
-        if (currentHealth<=0)
+        if (currentHealth<=0 && playerAnimator.GetInteger("CurrentState") < STATE_DIE)
         {
             Death();
+            Debug.Log("Death");
         }
         if (Input.GetKey(KeyCode.Space)) SceneManager.LoadScene("TransitionScene");
        
@@ -265,7 +267,7 @@ public class PlayerScript : MonoBehaviour {
         if (grounded &&playerAnimator.GetInteger("CurrentState") != STATE_JUMP)
         {
             grounded = false;
-            //audioPlayer.PlayOneShot(audio_jump);
+            audioPlayer.PlayOneShot(audio_jump);
             playerAnimator.SetInteger("CurrentState", STATE_JUMP);
         }
     }
@@ -321,31 +323,30 @@ public class PlayerScript : MonoBehaviour {
         switch (itemName)
         {
             case "Coin":
-                Debug.Log("Coin");
                 GlobalControl.Score += 50;
+                audioPlayer.PlayOneShot(audio_collectCoin);
                 break;
             case "HealthHeart":
-                Debug.Log("HealthHeart");
                 currentHealth = Mathf.Min(currentHealth + 1, maxHealth);
+                audioPlayer.PlayOneShot(audio_collectHealth);
                 break;
             case "BlueKey":
-                Debug.Log("BlueKey");
                 GlobalControl.numBlueKey += 1;
+                audioPlayer.PlayOneShot(audio_collectKey);
                 break;
             case "GoldenKey":
-                Debug.Log("GoldenKey");
                 GlobalControl.numGoldenKey += 1;
+                audioPlayer.PlayOneShot(audio_collectKey);
                 break;
             case "PowerItem":
-                Debug.Log("PowerItem");
                 GlobalControl.isPowerUp = true;
                 break;
             case "SpeedItem":
-                Debug.Log("SpeedItem");
                 maxVelocity =maxVelocity* 1.5f;
                 break;
             case "Diamond":
                 GlobalControl.Score += 300;
+                audioPlayer.PlayOneShot(audio_collectDiamond);
                 break;
         }
     }

@@ -14,7 +14,9 @@ public class Bullet : MonoBehaviour {
     private bool direction;
     private GameObject player;
     private Rigidbody2D bullet;
-
+    private
+    AudioSource audioPlayer;
+    public  AudioClip audio_destroy;
     
     private float timeFly = 0;
     private void Awake()
@@ -22,6 +24,7 @@ public class Bullet : MonoBehaviour {
         player = GameObject.Find("Player");
         bullet = GetComponent<Rigidbody2D>();
         Bullet_LoadData();
+        audioPlayer = GetComponent<AudioSource>();
     }
 
     // Use this for initialization
@@ -65,6 +68,7 @@ public class Bullet : MonoBehaviour {
             GetComponent<Rigidbody2D>().mass = 0;
             GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
             GetComponent<Animator>().SetBool("isDestroy", true);
+            audioPlayer.PlayOneShot(audio_destroy);
             if (collision.gameObject.tag=="Enemy")
             collision.gameObject.SendMessage("Damage", dmg);
             gameObject.layer = 14;

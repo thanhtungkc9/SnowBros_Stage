@@ -5,9 +5,13 @@ using UnityEngine;
 public class Switch_Elevator : MonoBehaviour {
 
     public bool isOn = false;
+    public AudioClip audio_switch; 
+        private AudioSource audioPlayer;
 	// Use this for initialization
 	void Start () {
-	}
+        audioPlayer = GetComponent<AudioSource>();
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -20,6 +24,8 @@ public class Switch_Elevator : MonoBehaviour {
         {
             isOn = true;
             GetComponent<Animator>().SetBool("IsOn", true);
+            audioPlayer.PlayOneShot(audio_switch);
+
         }
     }
 }
