@@ -348,6 +348,10 @@ public class PlayerScript : MonoBehaviour {
                 GlobalControl.Score += 300;
                 audioPlayer.PlayOneShot(audio_collectDiamond);
                 break;
+            case "one_UP":
+                GlobalControl.Lives += 1;
+                audioPlayer.PlayOneShot(audio_collectDiamond);
+                break;
         }
     }
 }

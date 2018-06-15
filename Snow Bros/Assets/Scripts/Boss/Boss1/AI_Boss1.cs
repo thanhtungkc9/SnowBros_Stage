@@ -100,4 +100,8 @@ public class AI_Boss1 : MonoBehaviour {
         if (random > 0.0f) 
         StartCoroutine(FireDropIE());
     }
+    public void Damage(int dmg)
+    {
+        Health = Mathf.Max(0, Health - dmg);
+    }
 }

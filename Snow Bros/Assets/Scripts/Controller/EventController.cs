@@ -7,10 +7,10 @@ public class EventController : MonoBehaviour {
 
     [SerializeField]
     public Image menu;
-
+    [SerializeField]
+    public Image instruction;
     private void Start()
     {
-
     }
     private void Update()
     {
@@ -57,5 +57,11 @@ public class EventController : MonoBehaviour {
         menu.gameObject.SetActive(false);
         Time.timeScale = 1;
         GlobalControl.isPaused = false;
+    }
+
+    public void HideInstruction()
+    {
+        instruction.gameObject.SetActive(false);
+        Time.timeScale = 1;
     }
 }

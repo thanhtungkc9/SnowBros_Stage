@@ -28,8 +28,8 @@ public class CreateSnowBallBonus : MonoBehaviour {
         {         
             timeCreateSnowballBonus = timeCreate;
             Instantiate(snowBallBonus, gameObject.transform.position, Quaternion.identity);
-            //transform.position = new Vector2(Random.Range(startX, endX), transform.position.y);
-            transform.position = new Vector2(playerTransform.position.x+Random.Range(-1.0f,1.0f), transform.position.y);
+            transform.position = new Vector2(Random.Range(startX, endX), transform.position.y);
+           // transform.position = new Vector2(playerTransform.position.x+Random.Range(-1.0f,1.0f), transform.position.y);
         }
        else
         {

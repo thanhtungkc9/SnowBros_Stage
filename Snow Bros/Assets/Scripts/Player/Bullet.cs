@@ -62,14 +62,14 @@ public class Bullet : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Ground"  || collision.gameObject.tag == "Wall"||collision.gameObject.tag=="Enemy"
-            ||collision.gameObject.tag=="SnowBall")
+            ||collision.gameObject.tag=="SnowBall"||collision.gameObject.tag=="Boss")
         {
             GetComponent<Rigidbody2D>().gravityScale = 0;
             GetComponent<Rigidbody2D>().mass = 0;
             GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
             GetComponent<Animator>().SetBool("isDestroy", true);
             audioPlayer.PlayOneShot(audio_destroy);
-            if (collision.gameObject.tag=="Enemy")
+            if (collision.gameObject.tag=="Enemy"|| collision.gameObject.tag == "Boss")
             collision.gameObject.SendMessage("Damage", dmg);
             gameObject.layer = 14;
         }

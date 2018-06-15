@@ -50,6 +50,7 @@ public class GlobalControl : MonoBehaviour
         }
         respawnPoint = GameObject.FindGameObjectWithTag("Player").transform.position;
     }
+
     public void Player_SpeedItem()
     {
         maxVelocity = 4.5f;

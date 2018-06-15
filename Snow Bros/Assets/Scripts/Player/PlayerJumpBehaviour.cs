@@ -8,7 +8,7 @@ public class PlayerJumpBehaviour : StateMachineBehaviour {
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
         animator.GetComponent<PlayerScript>().playerBody.AddForce(new Vector2(0, GlobalControl.jumpForce));
  
-        // animator.GetComponent<PlayerScript>().audioPlayer.PlayOneShot(animator.GetComponent<PlayerScript>().audio_jump);
+         animator.GetComponent<PlayerScript>().audioPlayer.PlayOneShot(animator.GetComponent<PlayerScript>().audio_jump);
         Debug.Log("Jump");
     }
 

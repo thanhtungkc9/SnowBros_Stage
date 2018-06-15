@@ -36,7 +36,7 @@ public class SnowBallBonus : MonoBehaviour {
     {
         if (collision.gameObject.tag == "Ground")
         {
-            int numDiamonds = Random.Range(2, 5);
+            int numDiamonds = Random.Range(4, 6);
             for (int i=0;i<numDiamonds;i++)
             {
                 GameObject diamond = Instantiate(Diamond, gameObject.transform.position, Quaternion.identity);
@@ -49,11 +49,7 @@ public class SnowBallBonus : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D collision)
     {
         
-        if (collision.gameObject.tag == "Player")
-        {
-            collision.gameObject.SendMessage("Damage", 1);
-            Destroy(gameObject);
-        }
+
         
     }
     private void OnCollisionExit2D(Collision2D collision)
